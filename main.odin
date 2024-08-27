@@ -352,11 +352,11 @@ main :: proc() {
           // draw rect of certain colour for each grid segment
           case .BG:
           case .OB:
-            draw_tile_pos(4, x_idx * tile_w, y_idx * tile_h)
-          case .SN:
-            draw_tile_pos(12, x_idx * tile_w, y_idx * tile_h)
-          case .HD:
             draw_tile_pos(8, x_idx * tile_w, y_idx * tile_h)
+          case .SN:
+            draw_tile_pos(4, x_idx * tile_w, y_idx * tile_h)
+          case .HD:
+            draw_tile_pos(12, x_idx * tile_w, y_idx * tile_h)
           case .FD:
             draw_tile_pos(0, x_idx * tile_w, y_idx * tile_h)
         }
