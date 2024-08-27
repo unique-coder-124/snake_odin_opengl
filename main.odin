@@ -29,7 +29,8 @@ calc_game_idx :: proc(vector2d: vec2, grid_w : i32) -> (result: i32) {
 }
 
 draw_tile_pos :: proc(start_point: i32, pos_x, pos_y: f32) {
-  gl.Uniform2f(gl.GetUniformLocation(global_shader, "translation"), pos_x, pos_y)
+  gl.Uniform1f(gl.GetUniformLocation(global_shader, "pos_x"), pos_x)
+  gl.Uniform1f(gl.GetUniformLocation(global_shader, "pos_y"), pos_y)
 
   gl.BindVertexArray(global_vao)
   defer gl.BindVertexArray(0)
