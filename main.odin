@@ -184,6 +184,7 @@ main :: proc() {
   glfw.WindowHint(glfw.CONTEXT_VERSION_MAJOR, 3)
   glfw.WindowHint(glfw.CONTEXT_VERSION_MINOR, 3)
   glfw.WindowHint(glfw.OPENGL_PROFILE, glfw.OPENGL_CORE_PROFILE)
+  glfw.WindowHint(glfw.COCOA_RETINA_FRAMEBUFFER, glfw.FALSE)
 
   window := glfw.CreateWindow(window_w, window_h, "Rainbow Triangle", nil, nil)
   assert(window != nil)
