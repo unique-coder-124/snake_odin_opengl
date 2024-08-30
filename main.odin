@@ -100,7 +100,7 @@ callback_key :: proc "c" ( window : glfw.WindowHandle, key, scancode, action, mo
 window_refresh :: proc "c" ( window : glfw.WindowHandle ) {
   context = runtime.default_context()
   w, h: i32
-  w, h = glfw.GetWindowSize(window)
+  w, h = glfw.GetFramebufferSize(window)
   gl.Viewport(0, 0, w, h)
 }
 
@@ -119,9 +119,9 @@ grid_h :: 40
 /*  methods choose size of window and grid tiles  */
 /*  -----------------------------------------------  */
 // method 1
-tile_s :: 20
-window_w :: tile_s * grid_w
-window_h :: tile_s * grid_h
+tile_s :: 40
+window_w :: tile_s * grid_w / 2
+window_h :: tile_s * grid_h / 2
 
 // method 2
 // window_w :: 1000
@@ -195,13 +195,12 @@ main :: proc() {
   // Load OpenGL 3.3 function pointers.
   gl.load_up_to(3,3, glfw.gl_set_proc_address)
 
-  w, h := glfw.GetFramebufferSize(window)
-  gl.Viewport(0,0,w,h)
-
   // Key press / Window-resize behaviour
   glfw.SetKeyCallback(window, callback_key)
   glfw.SetWindowRefreshCallback(window, window_refresh)
 
+  w, h := glfw.GetFramebufferSize(window)
+  gl.Viewport(0,0,w,h)
 
   // Set up vertex array/buffer objects.
   gl.GenVertexArrays(1, &global_vao)
