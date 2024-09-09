@@ -185,7 +185,7 @@ main :: proc() {
   glfw.WindowHint(glfw.CONTEXT_VERSION_MINOR, 3)
   glfw.WindowHint(glfw.OPENGL_PROFILE, glfw.OPENGL_CORE_PROFILE)
 
-  window := glfw.CreateWindow(window_w, window_h, "Rainbow Triangle", nil, nil)
+  window := glfw.CreateWindow(window_w, window_h, "Opengl snake", nil, nil)
   assert(window != nil)
   defer glfw.DestroyWindow(window)
 
