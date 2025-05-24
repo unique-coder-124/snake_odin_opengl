@@ -28,9 +28,9 @@ calc_game_idx :: proc(vector2d: vec2, grid_w : i32) -> (result: i32) {
   return
 }
 
-draw_tile_pos :: proc(start_index: i32, pos_x, pos_y: f32) { //, offsetx, offsety: f32) {
-  gl.Uniform1f(gl.GetUniformLocation(global_shader, "pos_x"), pos_x) // + offsetx)
-  gl.Uniform1f(gl.GetUniformLocation(global_shader, "pos_y"), pos_y) // + offsety)
+draw_tile_pos :: proc(start_index: i32, pos_x, pos_y: f32) {
+  gl.Uniform1f(gl.GetUniformLocation(global_shader, "pos_x"), pos_x)
+  gl.Uniform1f(gl.GetUniformLocation(global_shader, "pos_y"), pos_y)
 
   gl.BindVertexArray(global_vao)
   defer gl.BindVertexArray(0)
@@ -197,8 +197,8 @@ global_vbo: VBO
 global_ebo: EBO
 global_shader: ShaderProgram
 
-grid_w :: 100
-grid_h :: 80
+grid_w :: 50
+grid_h :: 40
 
 /*  methods choose size of window and grid tiles  */
 /*  -----------------------------------------------  */
@@ -225,7 +225,7 @@ offset_y : f32 = 0
 snake_game: [grid_w * grid_h]tile                 // array of tiles representing game board
 snake_head: vec2 = {grid_w/2, grid_h/2}           // position of head
 snake := make([dynamic]vec2, 0, grid_w * grid_h)  // body tiles of snake
-velocity :: 10.0                                  // position updates per second
+velocity :: 20.0                                  // position updates per second
 snake_dash: bool = false                          // flag for snake block skip abiliy
 dash_cooldown_const :: 5                          // position updates until next dash
 dash_cooldown: int = 0                            // initial dash cooldown
@@ -258,7 +258,7 @@ vertices : [80] f32 = {
   -1, 1 - tile_h,           144.0/255, 0, 1,
 }
 
-indices : [24] u32 = {
+indices: [24] u32 = {
   // Coordinates ; Colors
   // food
   0,  1,  2,
@@ -467,13 +467,13 @@ main :: proc() {
           // draw rect of certain colour for each grid segment
           case .BG:
           case .OB:
-            draw_tile_pos(2, x_idx * tile_w + offset_x, y_idx * tile_h + offset_y) //, offset_x, offset_y)
+            draw_tile_pos(2, x_idx * tile_w + offset_x, y_idx * tile_h + offset_y)
           case .SN:
-            draw_tile_pos(1, x_idx * tile_w + offset_x, y_idx * tile_h + offset_y) //, offset_x, offset_y)
+            draw_tile_pos(1, x_idx * tile_w + offset_x, y_idx * tile_h + offset_y)
           case .HD:
-            draw_tile_pos(3, x_idx * tile_w + offset_x, y_idx * tile_h + offset_y) //, offset_x, offset_y)
+            draw_tile_pos(3, x_idx * tile_w + offset_x, y_idx * tile_h + offset_y)
           case .FD:
-            draw_tile_pos(0, x_idx * tile_w + offset_x, y_idx * tile_h + offset_y) //, offset_x, offset_y)
+            draw_tile_pos(0, x_idx * tile_w + offset_x, y_idx * tile_h + offset_y)
         }
       }
     }
